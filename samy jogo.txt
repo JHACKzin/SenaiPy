@@ -1,0 +1,4 @@
+   imaginando o jogo de realidade com ficçao baseado no efeito borboleta
+
+1- Hello world, escrever o inicio/guia de iniciantes com botao skip, escondido do jogador antes do menu do jogo como pegadinha.
+2- descrever/pensar/escrever todo o menu do jogo
