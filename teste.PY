@@ -1,48 +1,41 @@
-print ("hello world")
 import tkinter as tk
-from tkinter import messagebox
 
-def mensagem():
-    messagebox.showinfo("CADASTRO CONCLUÍDO", f"{entryNometutor.get()};\nPET:{entryNomepet.get()}")
+def move_focus(event):
+    # Obtém o widget atual que tem o foco
+    current_widget = event.widget
+    
+    # Obtém todos os widgets em ordem de empilhamento
+    widgets = current_widget.master.winfo_children()
+    
+    # Encontra o índice do widget atual
+    try:
+        index = widgets.index(current_widget)
+    except ValueError:
+        index = -1
+    
+    # Move o foco para o próximo widget
+    next_index = (index + 1) % len(widgets)
+    next_widget = widgets[next_index]
+    
+    # Define o foco no próximo widget
+    next_widget.focus_set()
 
-# Configuração da janela principal
-janela = tk.Tk()
-janela.title("CADASTRO PET SHOP SACOOBY DOOH :)")
+# Cria a janela principal
+root = tk.Tk()
+root.title("Exemplo de Foco")
 
-# Criação dos widgets/label/lbl
-labelNometutor = tk.Label(janela, text="NOME DO TUTOR",font=("arial", 12), fg="blue", bg="pink")
-labelNometutor.pack(padx=50, pady=5)
+# Cria vários widgets de entrada (Entry)
+entry1 = tk.Entry(root)
+entry1.pack(padx=10, pady=5)
+entry2 = tk.Entry(root)
+entry2.pack(padx=10, pady=5)
+entry3 = tk.Entry(root)
+entry3.pack(padx=10, pady=5)
 
-entryNometutor = tk.Entry(janela, width=100)
-entryNometutor.pack(padx=50, pady=5)
+# Associa a tecla Enter ao evento de mover o foco
+entry1.bind("<Return>", move_focus)
+entry2.bind("<Return>", move_focus)
+entry3.bind("<Return>", move_focus)
 
-labelNomepet = tk.Label(janela, text="NOME DO PET",font=("arial", 12), fg="blue", bg="pink")
-labelNomepet.pack(padx=50, pady=5)
-
-entryNomepet = tk.Entry(janela, width=100)
-entryNomepet.pack(padx=50, pady=5)
-
-labelDatapet = tk.Label(janela, text="DATA DE NASCIMENTO DO PET",font=("arial", 12), fg="blue", bg="pink")
-labelDatapet.pack(padx=50, pady=5)
-
-entryDatapet = tk.Entry(janela, width=100)
-entryDatapet.pack(padx=50, pady=5)
-
-labelEspeciepet = tk.Label(janela, text="ESPÉCIE DO PET",font=("arial", 12), fg="blue", bg="pink")
-labelEspeciepet.pack(padx=50, pady=5)
-
-entryEspeciepet = tk.Entry(janela, width=100)
-entryEspeciepet.pack(padx=50, pady=5)
-
-labelRacapet = tk.Label(janela, text="RAÇA DO PET",font=("arial", 12), fg="blue", bg="pink")
-labelRacapet.pack(padx=50, pady=5)
-
-entryRacapet = tk.Entry(janela, width=100)
-entryRacapet.pack(padx=50, pady=5)
-
-buttonSalvar = tk.Button(janela, text="Salvar", font=("arial", 12), fg="blue", bg="pink", command=mensagem)
-buttonSalvar.pack(padx=50, pady=50)
-
-janela.geometry("400x300")
-# Executa o loop principal da interface gráfica
-janela.mainloop()
+# Inicia o loop principal da aplicação
+root.mainloop()
