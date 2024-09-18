@@ -43,12 +43,12 @@ def salvar_chamado():
         return
     
     novo_chamado = {
-        'numero do chamado': numero_chamado,
-        'come do cliente': nome_cliente,
-        'tipo do problema': tipo_problema,
-        'descricao do problema': descricao,
+        'numero_chamado': numero_chamado,
+        'cliente': nome_cliente,
+        'tipo_problema': tipo_problema,
+        'descricao': descricao,
         'prioridade': prioridade,
-        'data de abertura': data_abertura
+        'data_abertura': data_abertura
     }
     
     chamados = carregar_chamados()
@@ -118,17 +118,6 @@ def move_focus(event):
 janela = tk.Tk()
 janela.title("Sistema de Suporte Técnico")
 
-#funçao para limitar o numero de caracteres do entry
-def on_validate_input(char, max_length=10):
-    # Verifica o comprimento da entrada atual
-    return len(text_descricao.get() + char) <= max_length
-
-# Define o comprimento máximo permitido
-max_length = 250
-
-# Função de validação
-validate_command = janela.register(lambda char: on_validate_input(char, max_length))
-
 # Labels e Entries para os campos
 tk.Label(janela, text="Nome do Cliente:").grid(row=0, column=0, padx=10, pady=5, sticky='w')
 entry_cliente = tk.Entry(janela)
@@ -175,11 +164,6 @@ tk.Label(janela, text="Data de Abertura:").grid(row=5, column=0, padx=10, pady=5
 label_data_abertura = tk.Label(janela, text=date.today(), bg='lightgray')
 label_data_abertura.grid(row=5, column=1, padx=10, pady=5, sticky='ew')
 
-entry_cliente.bind("<Return>", move_focus)
-combo_tipo_problema.bind("<Return>", move_focus)
-text_descricao.bind("<Return>", move_focus)
-combo_prioridade.bind("<Return>", move_focus)
-
 # Botão para salvar o chamado
 btn_salvar = tk.Button(janela, text="Salvar Chamado", command=salvar_chamado)
 btn_salvar.grid(row=6, column=0, columnspan=2, padx=10, pady=10, sticky='ew')
@@ -192,6 +176,11 @@ btn_novo_chamado.grid(row=7, column=0, columnspan=2, padx=10, pady=10, sticky='e
 tk.Label(janela, text="Localizar Chamado (Número):").grid(row=8, column=0, padx=10, pady=5, sticky='w')
 entry_numero_localizar = tk.Entry(janela)
 entry_numero_localizar.grid(row=8, column=1, padx=10, pady=5, sticky='ew')
+
+entry_cliente.bind("<Return>", move_focus)
+combo_tipo_problema.bind("<Return>", move_focus)
+text_descricao.bind("<Return>", move_focus)
+combo_prioridade.bind("<Return>", move_focus)
 
 # Botão para localizar o chamado
 btn_localizar = tk.Button(janela, text="Localizar Chamado", command=localizar_chamado)
